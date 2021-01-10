@@ -8,18 +8,14 @@ var startButton = document.querySelector("#start-button");
 var count = localStorage.getItem("count");
 var secondsLeft = 101;
 
-var arrScores = (localStorage.getItem("highScore"));
-
-counter.textContent = count;
-
 var quiz = [
   {
     question: 'Which of the following is correct about features of JavaScript?',
     answer: {
-      a: 'a. JavaScript is a lightweight, interpreted programming language.',
+      a: 'a. JavaScript is a lightweight, interpreted programming language.   ',
       b: 'b. JavaScript is designed for creating network-centric applications.',
-      c: 'c. JavaScript is complementary to and integrated with Java.',
-      d: 'd. All of the above',
+      c: 'c. JavaScript is complementary to and integrated with Java.         ',
+      d: 'd. All of the above                                                 ',
     },
     correctAnswer: 'd',
   },
@@ -27,10 +23,10 @@ var quiz = [
   {
     question: 'Which is the correct way to write a JavaScript array?',
     answer: {
-      a: 'a. var txt = new Array(1:"tim",2:"kim",3:"jim")',
-      b: 'b. var txt = new Array:1=("tim")2=("kim")3=("jim")',
-      c: 'c. var txt = new Array("tim","kim","jim")',
-      d: 'd. new Array="tim","kim","jim"',
+      a: 'a. var txt = new Array(1:"tim",2:"kim",3:"jim")                     ',
+      b: 'b. var txt = new Array:1=("tim")2=("kim")3=("jim")                  ',
+      c: 'c. var txt = new Array("tim","kim","jim")                           ',
+      d: 'd. new Array="tim","kim","jim"                                      ',
     },
     correctAnswer: 'c',
   },
@@ -39,10 +35,10 @@ var quiz = [
   {
     question: 'What is mean by "this" keyword in JavaScript?',
     answer: {
-      a: 'a. It refers current object',
-      b: 'b. It refers previous object',
-      c: 'c. It is variable which contains value',
-      d: 'd. None of the above',
+      a: 'a. It refers current object                                        ',
+      b: 'b. It refers previous object                                       ',
+      c: 'c. It is variable which contains value                             ',
+      d: 'd. None of the above                                               ',
     },
     correctAnswer: 'a',
   },
@@ -50,10 +46,10 @@ var quiz = [
   {
     question: 'Using _______ statement is how you test for a specific condition',
     answer: {
-      a: 'a. Select',
-      b: 'b. If',
-      c: 'c. Switch',
-      d: 'd. For',
+      a: 'a. Select                                                         ',
+      b: 'b. If                                                             ',
+      c: 'c. Switch                                                         ',
+      d: 'd. For                                                            ',
     },
     correctAnswer: 'b',
   },
@@ -62,10 +58,10 @@ var quiz = [
   {
     question: 'Which of the following is not a valid JavaScript variable name?',
     answer: {
-      a: 'a. 2names',
-      b: 'b. _first_and_last_names',
-      c: 'c. FirstAndLast',
-      d: 'd. None of the above',
+      a: 'a. 2names                                                         ',
+      b: 'b. _first_and_last_names                                          ',
+      c: 'c. FirstAndLast                                                   ',
+      d: 'd. None of the above                                              ',
     },
     correctAnswer: 'a',
   },
@@ -73,10 +69,10 @@ var quiz = [
   {
     question: 'Which of the following type of variable is visible everywhere in your JavaScript code?',
     answer: {
-      a: 'a. global variable',
-      b: 'b. local variable',
-      c: 'c. Both of the above',
-      d: 'd. None of the above',
+      a: 'a. global variable                                                ',
+      b: 'b. local variable                                                 ',
+      c: 'c. Both of the above                                              ',
+      d: 'd. None of the above                                              ',
     },
     correctAnswer: 'a',
   },
@@ -84,12 +80,63 @@ var quiz = [
 ]
 
 
+function showScores() {
+  quizCont.innerHTML = "";
+  var h3q = document.createElement("H3");
+  var text3 = document.createTextNode("High Scores");
+  h3q.appendChild(text3);
+  quizCont.appendChild(h3q);
+
+  var newarrScores = (localStorage.getItem("highScore"));
+  var finalScores = JSON.parse(newarrScores);
+  if (finalScores == null) {
+    var listScores = document.createElement("LI");
+    var item = document.createTextNode("No Scores to show");
+    listScores.appendChild(item);
+    quizCont.appendChild(listScores);
+  } else {
+    valuesScores = Object.values(finalScores);
+    for (ind = 0; ind < valuesScores.length; ind++) {
+      var listScores = document.createElement("LI");
+      var item = document.createTextNode(finalScores[ind].initials + ' - ' + finalScores[ind].score);
+      listScores.appendChild(item);
+      quizCont.appendChild(listScores);
+    };
+  };
+
+
+  var btnGoBack = document.createElement("BUTTON");
+  btnGoBack.innerHTML = "Go Back";
+  quizReslt.appendChild(btnGoBack).setAttribute("class", "goback-button");
+  btnGoBack.addEventListener("click", function () {
+    location.reload();
+  });
+
+  var btnClearScores = document.createElement("BUTTON");
+  btnClearScores.innerHTML = "Clear High Scores";
+  quizReslt.appendChild(btnClearScores).setAttribute("class", "clearscores-button");
+  btnClearScores.addEventListener("click", function () {
+    if (finalScores == null){
+      location.reload();
+    }
+    localStorage.clear();
+    quizReslt.innerHTML="";
+    showScores();
+  });
+}
+
+
+var btnShowScores = document.createElement("BUTTON");
+btnShowScores.innerHTML = "Show High Scores";
+timeEl.appendChild(btnShowScores).setAttribute("class", "showscores-button");
+btnShowScores.addEventListener("click", function () {
+  cont.innerHTML = "";
+  showScores();
+});
+
 
 startButton.addEventListener("click", function () {
-
-
   quizReslt.innerHTML = "";
-
   showQuestion(0);
 
   var timerInterval = setInterval(function () {
@@ -104,13 +151,6 @@ startButton.addEventListener("click", function () {
 
 
 
-  count++;
-  counter.textContent = count;
-
-  localStorage.setItem("count", count);
-
-
-
   function showQuestion(i) {
     cont.innerHTML = "";
     quizCont.innerHTML = "";
@@ -118,7 +158,7 @@ startButton.addEventListener("click", function () {
     if (i == 6 && secondsLeft > 0) {
       clearInterval(timerInterval);
       allDone();
-      
+
       return;
     };
 
@@ -231,51 +271,28 @@ startButton.addEventListener("click", function () {
     inpuntIni.setAttribute("id", "idInitials");
     inpuntIni.setAttribute("value", "");
     quizCont.appendChild(inpuntIni);
-    
-    
+
+
     var arrScores = JSON.parse(localStorage.getItem('highScore')) || [];
     var btnSubmit = document.createElement("BUTTON");
     btnSubmit.innerHTML = "Submit";
     quizCont.appendChild(btnSubmit).setAttribute("class", "submit-button");
     btnSubmit.addEventListener("click", function () {
       quizScore = {
-        initials: initialsValue=document.getElementById("idInitials").value,
+        initials: initialsValue = document.getElementById("idInitials").value,
         score: secondsLeft
       };
-      arrScores.push(quizScore); 
+      arrScores.push(quizScore);
       localStorage.setItem("highScore", JSON.stringify(arrScores));
       showScores();
 
     })
 
-    
+
   }
 
 
-  function showScores() {
-    quizCont.innerHTML = "";
-    var h3q = document.createElement("H3");
-    var text3 = document.createTextNode("High Scores");
-    h3q.appendChild(text3);
-    quizCont.appendChild(h3q);
 
-
-    
-    var listScores = document.createElement("LI");
-    var item = document.createTextNode("Something")
-    listScores.appendChild(item);
-    quizCont.appendChild(listScores);
-    
-    
-    
-    var btnGoBack = document.createElement("BUTTON");
-    btnGoBack.innerHTML = "Go Back";
-    quizCont.appendChild(btnGoBack).setAttribute("class", "goback-button");
-    btnGoBack.addEventListener("click", function () {
-      
-      
-    })
-
-  } 
 
 });
+
