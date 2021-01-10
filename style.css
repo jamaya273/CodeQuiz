@@ -27,6 +27,7 @@ body {
   margin: 0 auto;
   text-align: left;
   margin-bottom:100px;
+  display: block;
 }
 
 #quizResult {
@@ -87,30 +88,6 @@ body {
   background-color: #1678c2;
 }
 
-
-
-
-.answer-button {
-  border-radius: 4px;
-  border-style: none;
-  box-shadow: rgba(34,36,38,.15) 0 0 0 0 inset;
-  color: #fff;
-  cursor: pointer;
-  font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
-  font-size: 1em;
-  font-weight: 500;
-  line-height: 0;
-  padding: 20px;
-  margin: 10px;
-  background-color: #2185d0;
-  float: left;
-}
-
-.answer-button:hover {
-  background-color:  #1678c2;
-}
-
-
 .submit-button {
   border-radius: 4px;
   border-style: none;
@@ -129,3 +106,28 @@ body {
 .submit-button:hover {
   background-color: #1678c2;
 }
+
+
+
+.answer-button, .button-group {
+  border-radius: 4px;
+  border-style: none;
+  box-shadow: rgba(34,36,38,.15) 0 0 0 0 inset;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 0;
+  padding: 20px;
+  margin: 10px;
+  background-color: #2185d0;
+  display: block;
+}
+
+.answer-button:hover {
+  background-color:  #1678c2;
+}
+
+
+  

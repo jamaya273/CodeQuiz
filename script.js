@@ -7,15 +7,16 @@ var counter = document.querySelector("#counter");
 var startButton = document.querySelector("#start-button");
 var count = localStorage.getItem("count");
 var secondsLeft = 101;
+var finaScore=secondsLeft;
 
 var quiz = [
   {
     question: 'Which of the following is correct about features of JavaScript?',
     answer: {
-      a: 'a. JavaScript is a lightweight, interpreted programming language.   ',
+      a: 'a. JavaScript is a lightweight, interpreted programming language.',
       b: 'b. JavaScript is designed for creating network-centric applications.',
-      c: 'c. JavaScript is complementary to and integrated with Java.         ',
-      d: 'd. All of the above                                                 ',
+      c: 'c. JavaScript is complementary to and integrated with Java.',
+      d: 'd. All of the above',
     },
     correctAnswer: 'd',
   },
@@ -23,10 +24,10 @@ var quiz = [
   {
     question: 'Which is the correct way to write a JavaScript array?',
     answer: {
-      a: 'a. var txt = new Array(1:"tim",2:"kim",3:"jim")                     ',
-      b: 'b. var txt = new Array:1=("tim")2=("kim")3=("jim")                  ',
-      c: 'c. var txt = new Array("tim","kim","jim")                           ',
-      d: 'd. new Array="tim","kim","jim"                                      ',
+      a: 'a. var txt = new Array(1:"tim",2:"kim",3:"jim")',
+      b: 'b. var txt = new Array:1=("tim")2=("kim")3=("jim")',
+      c: 'c. var txt = new Array("tim","kim","jim")',
+      d: 'd. new Array="tim","kim","jim"',
     },
     correctAnswer: 'c',
   },
@@ -35,10 +36,10 @@ var quiz = [
   {
     question: 'What is mean by "this" keyword in JavaScript?',
     answer: {
-      a: 'a. It refers current object                                        ',
-      b: 'b. It refers previous object                                       ',
-      c: 'c. It is variable which contains value                             ',
-      d: 'd. None of the above                                               ',
+      a: 'a. It refers current object',
+      b: 'b. It refers previous object',
+      c: 'c. It is variable which contains value',
+      d: 'd. None of the above',
     },
     correctAnswer: 'a',
   },
@@ -46,10 +47,10 @@ var quiz = [
   {
     question: 'Using _______ statement is how you test for a specific condition',
     answer: {
-      a: 'a. Select                                                         ',
-      b: 'b. If                                                             ',
-      c: 'c. Switch                                                         ',
-      d: 'd. For                                                            ',
+      a: 'a. Select',
+      b: 'b. If',
+      c: 'c. Switch',
+      d: 'd. For',
     },
     correctAnswer: 'b',
   },
@@ -58,10 +59,10 @@ var quiz = [
   {
     question: 'Which of the following is not a valid JavaScript variable name?',
     answer: {
-      a: 'a. 2names                                                         ',
-      b: 'b. _first_and_last_names                                          ',
-      c: 'c. FirstAndLast                                                   ',
-      d: 'd. None of the above                                              ',
+      a: 'a. 2names',
+      b: 'b. _first_and_last_names',
+      c: 'c. FirstAndLast',
+      d: 'd. None of the above',
     },
     correctAnswer: 'a',
   },
@@ -69,10 +70,10 @@ var quiz = [
   {
     question: 'Which of the following type of variable is visible everywhere in your JavaScript code?',
     answer: {
-      a: 'a. global variable                                                ',
-      b: 'b. local variable                                                 ',
-      c: 'c. Both of the above                                              ',
-      d: 'd. None of the above                                              ',
+      a: 'a. global variable',
+      b: 'b. local variable',
+      c: 'c. Both of the above',
+      d: 'd. None of the above',
     },
     correctAnswer: 'a',
   },
@@ -144,8 +145,9 @@ startButton.addEventListener("click", function () {
     timeEl.textContent = "Time: " + (secondsLeft - 1);
     if (secondsLeft <= 0) {
       clearInterval(timerInterval);
+      finalScore=0;
       allDone();
-      timeEl.textContent = "Time: " + secondsLeft;
+      timeEl.textContent = "Time: " + finalScore;
     };
   }, 1000);
 
@@ -157,7 +159,9 @@ startButton.addEventListener("click", function () {
 
     if (i == 6 && secondsLeft > 0) {
       clearInterval(timerInterval);
+      finalScore=secondsLeft;
       allDone();
+      timeEl.textContent = "Time: " + finalScore;
 
       return;
     };
@@ -169,7 +173,7 @@ startButton.addEventListener("click", function () {
 
     var btn1 = document.createElement("BUTTON");
     btn1.innerHTML = quiz[i].answer.a;
-    quizCont.appendChild(btn1).setAttribute("class", "answer-button");
+    quizCont.appendChild(btn1).setAttribute("class", "answer-button" + " button-group");
     btn1.addEventListener("click", function () {
       if (quiz[i - 1].correctAnswer === 'a') {
         showQuestion(i);
@@ -183,7 +187,7 @@ startButton.addEventListener("click", function () {
 
     var btn2 = document.createElement("BUTTON");
     btn2.innerHTML = quiz[i].answer.b;
-    quizCont.appendChild(btn2).setAttribute("class", "answer-button");
+    quizCont.appendChild(btn2).setAttribute("class", "answer-button" + " button-group");
     btn2.addEventListener("click", function () {
       if (quiz[i - 1].correctAnswer === 'b') {
         showQuestion(i);
@@ -197,7 +201,7 @@ startButton.addEventListener("click", function () {
 
     var btn3 = document.createElement("BUTTON");
     btn3.innerHTML = quiz[i].answer.c;
-    quizCont.appendChild(btn3).setAttribute("class", "answer-button");
+    quizCont.appendChild(btn3).setAttribute("class", "answer-button" + " button-group");
     btn3.addEventListener("click", function () {
       if (quiz[i - 1].correctAnswer === 'c') {
         showQuestion(i);
@@ -211,7 +215,7 @@ startButton.addEventListener("click", function () {
 
     var btn4 = document.createElement("BUTTON");
     btn4.innerHTML = quiz[i].answer.d;
-    quizCont.appendChild(btn4).setAttribute("class", "answer-button");
+    quizCont.appendChild(btn4).setAttribute("class", "answer-button" + " button-group");
     btn4.addEventListener("click", function () {
       if (quiz[i - 1].correctAnswer === 'd') {
         showQuestion(i);
@@ -257,7 +261,7 @@ startButton.addEventListener("click", function () {
     quizCont.appendChild(h3q);
 
     var Pa = document.createElement("P");
-    var text5 = document.createTextNode("Your Final Score is " + secondsLeft);
+    var text5 = document.createTextNode("Your Final Score is " + finalScore);
     Pa.appendChild(text5);
     quizCont.appendChild(Pa);
 
@@ -280,7 +284,7 @@ startButton.addEventListener("click", function () {
     btnSubmit.addEventListener("click", function () {
       quizScore = {
         initials: initialsValue = document.getElementById("idInitials").value,
-        score: secondsLeft
+        score: finalScore
       };
       arrScores.push(quizScore);
       localStorage.setItem("highScore", JSON.stringify(arrScores));
@@ -290,8 +294,6 @@ startButton.addEventListener("click", function () {
 
 
   }
-
-
 
 
 });
